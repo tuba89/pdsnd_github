@@ -190,14 +190,14 @@ def user_stats(df, city):
 
         # Display earliest, most recent, and most common year of birth
         # 1- the earliest year of birth
-        earl = df['Birth Year'].min()
+        eraliestBirthYear = df['Birth Year'].min()
         # 2- the most recent year of birth
-        recent = df['Birth Year'].max()
+        recentBirthYear = df['Birth Year'].max()
         # 3- the most common year of birth
-        common = df['Birth Year'].mode()[0]
-        print("The earliest year of Birth is= ", int(earl))
-        print("The most recent year of Birth is= ", int(recent))
-        print("The common year of Birth is= ", int(common))
+        commonBirthYear = df['Birth Year'].mode()[0]
+        print("The earliest year of Birth is= ", int(eraliestBirthYear))
+        print("The most recent year of Birth is= ", int(recentBirthYear))
+        print("The common year of Birth is= ", int(commonBirthYear))
     elif city.title() == 'Washington':
         print("OOPS! we are sorry, The Gender and Birth of year doesn't exist")  
  
