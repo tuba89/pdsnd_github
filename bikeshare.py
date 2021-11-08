@@ -69,12 +69,12 @@ def load_data(city, month, day):
     df['day_of_week'] = df['Start Time'].dt.day_name()
     df['hour'] = df['Start Time'].dt.hour
     
-    # Filter the month
+    # Filter the month & create new dataframe
     if month != "all":
         df = df[df['month'].str.startswith(month.title())]
 
         
-    #Filter the day
+    #Filter the day & create new dataframe
     if day != 'all':
         df = df[df['day_of_week'].str.startswith(day.title())]
     
@@ -100,6 +100,8 @@ def time_stats(df):
 
     # display the most common start hour
     start_hour = df['hour'].mode()[0]
+    
+    # Converting int hour to (AM or PM)
     best_hour = datetime.strptime(str(start_hour), "%H")
     best_start_hour = best_hour .strftime("%I %p")
     print('\nThe Most common start hour: ', best_start_hour)
