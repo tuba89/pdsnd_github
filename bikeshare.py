@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-
 from datetime import datetime
 import time
 import pandas as pd
@@ -64,23 +63,19 @@ def load_data(city, month, day):
     df = pd.read_csv(CITY_DATA[city])
     
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    # df['month'] = df['Start Time'].dt.month
+
     df['month'] = df['Start Time'].dt.month_name()
-    # df['day_of_week'] = df['Start Time'].dt.weekday_name
-    # df['day_of_week'] = df['Start Time'].dt.dayofweek
+
     df['day_of_week'] = df['Start Time'].dt.day_name()
     df['hour'] = df['Start Time'].dt.hour
     
     # Filter the month
     if month != "all":
-        # month = MONTH_LIST.index(month) + 1
-        # df= df[df['month'] == month]
         df = df[df['month'].str.startswith(month.title())]
 
         
     #Filter the day
     if day != 'all':
-        # df = df[df['day_of_week'] == day.title()]
         df = df[df['day_of_week'].str.startswith(day.title())]
     
     return df
@@ -93,13 +88,6 @@ def time_stats(df):
     print('.'*48)
     start_time = time.time()
 
-    # display the most common month
-    # df['Start Time']= pd.to_datetime(df['Start Time'])
-    # df['month']= df['Start Time'].dt.month
-    # common_month= df['month'].mode()[0]
-    # common_month= MONTH_LIST[df['month'].mode()[0]-1]
-    # month_name = common_month.title()
-    # print('\nThe Most common month: ',month_name)
     df['month'] = df['Start Time'].dt.month_name()
     most_common_month = df['month'].mode()[0]
     print('\nThe Most common month: ', most_common_month)
