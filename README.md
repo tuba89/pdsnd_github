@@ -38,6 +38,7 @@ This is a python script, I used python functions, some python libraries like pan
 3. [Stackoverflow](https://stackoverflow.com)
 4. pandas Iloc [pandas Iloc](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.iloc.html#pandas-dataframe-iloc)
 5. [Markdown](https://www.markdownguide.org/basic-syntax/)
+6. [GitReady](http://gitready.com/beginner/2009/01/21/pushing-and-pulling.html)
 
 
 
