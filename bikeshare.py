@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-
 from datetime import datetime
 import time
 import pandas as pd
@@ -28,21 +27,24 @@ def get_filters():
     # get user input for city (chicago, new york city, washington).
     # HINT: Use a while loop to handle invalid inputs
     while True:
-        city = input("Enter the name of the City to analyse (Chicago, New York City, Washington): ").lower()
+        city = input("Enter the name of the City to analyse (Chicago, New York City, Washington): ")
+        city.lower()
         if city in CITY_LIST:
             break
         print("\nInvalid City !, Try Again please ...\n")
         
     # get user input for month (all, january, february, ... , june)
     while True:
-        month = input("Enter the month(january, february, ... , june), Type ALL to apply no month filter: ").lower()
+        month = input("Enter the month(january, february, ... , june), Type ALL to apply no month filter: ")
+        month.lower()
         if month in MONTH_LIST or month == "ALL".lower():
             break
         print("\nInvalid month !, Try Again please ...\n")
         
     # get user input for day of week (all, monday, tuesday, ... sunday
     while True:
-        day = input("Enter the day of week (monday, tuesday, ... sunday), Type ALL to apply no day filter: ").lower()
+        day = input("Enter the day of week (monday, tuesday, ... sunday), Type ALL to apply no day filter: ")
+        day.lower()
         if day in DAY_LIST or day == "ALL".lower():
             break
         print("\nInvalid day !, Try Again please ...\n")
@@ -64,23 +66,19 @@ def load_data(city, month, day):
     df = pd.read_csv(CITY_DATA[city])
     
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    # df['month'] = df['Start Time'].dt.month
+
     df['month'] = df['Start Time'].dt.month_name()
-    # df['day_of_week'] = df['Start Time'].dt.weekday_name
-    # df['day_of_week'] = df['Start Time'].dt.dayofweek
+
     df['day_of_week'] = df['Start Time'].dt.day_name()
     df['hour'] = df['Start Time'].dt.hour
     
-    # Filter the month
+    # Filter the month & create new dataframe
     if month != "all":
-        # month = MONTH_LIST.index(month) + 1
-        # df= df[df['month'] == month]
         df = df[df['month'].str.startswith(month.title())]
 
         
-    #Filter the day
+    #Filter the day & create new dataframe
     if day != 'all':
-        # df = df[df['day_of_week'] == day.title()]
         df = df[df['day_of_week'].str.startswith(day.title())]
     
     return df
@@ -93,13 +91,6 @@ def time_stats(df):
     print('.'*48)
     start_time = time.time()
 
-    # display the most common month
-    # df['Start Time']= pd.to_datetime(df['Start Time'])
-    # df['month']= df['Start Time'].dt.month
-    # common_month= df['month'].mode()[0]
-    # common_month= MONTH_LIST[df['month'].mode()[0]-1]
-    # month_name = common_month.title()
-    # print('\nThe Most common month: ',month_name)
     df['month'] = df['Start Time'].dt.month_name()
     most_common_month = df['month'].mode()[0]
     print('\nThe Most common month: ', most_common_month)
@@ -112,6 +103,8 @@ def time_stats(df):
 
     # display the most common start hour
     start_hour = df['hour'].mode()[0]
+    
+    # Converting int hour to (AM or PM)
     best_hour = datetime.strptime(str(start_hour), "%H")
     best_start_hour = best_hour .strftime("%I %p")
     print('\nThe Most common start hour: ', best_start_hour)
