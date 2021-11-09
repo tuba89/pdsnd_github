@@ -1,2 +1,14 @@
 .github/**
+
+# All csv files
 *.csv
+
+# Ignore Mac OS Stuff
+**/.DS_Store
+
+
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
